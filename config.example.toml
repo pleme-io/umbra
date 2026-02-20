@@ -1,0 +1,40 @@
+# Umbra configuration — ~/.config/umbra/config.toml
+#
+# Endpoints define S3-compatible destinations for publishing reports.
+# The viewer (HTML/CSS/JS) + manifest.json + report data all land in the same bucket/prefix.
+#
+# Usage:
+#   umbra.report(endpoints: ["production"])     — publish to a specific endpoint
+#   umbra.report(endpoints: ["all"])            — publish to every endpoint
+#   umbra.report()                              — publish to the default endpoint
+#   umbra.publish(report_path: "report.json")   — re-publish an existing report
+#   umbra.endpoints()                           — list all configured endpoints
+
+[publish]
+# Default endpoint used when no specific endpoint is requested.
+default = "production"
+
+# --- AWS S3 ---
+[publish.endpoints.production]
+bucket = "umbra-reports"
+prefix = "prod"
+region = "us-east-1"
+
+[publish.endpoints.staging]
+bucket = "umbra-reports"
+prefix = "staging"
+region = "us-east-1"
+profile = "staging"                             # AWS CLI profile
+
+# --- Cloudflare R2 ---
+# [publish.endpoints.r2]
+# bucket = "umbra"
+# prefix = "reports"
+# endpoint_url = "https://ACCOUNT_ID.r2.cloudflarestorage.com"
+# region = "auto"
+
+# --- MinIO / self-hosted ---
+# [publish.endpoints.local]
+# bucket = "umbra"
+# endpoint_url = "http://minio.local:9000"
+# region = "us-east-1"

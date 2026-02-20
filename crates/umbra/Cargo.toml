@@ -1,0 +1,24 @@
+[package]
+name = "umbra"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+description = "Local MCP proxy for Kubernetes container diagnostics"
+
+[[bin]]
+name = "umbra"
+path = "src/main.rs"
+
+[dependencies]
+umbra-core = { workspace = true }
+rmcp = { workspace = true, features = ["server", "client", "transport-io", "transport-child-process"] }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+chrono = { workspace = true }
+toml = { workspace = true }
+serde_yaml = { workspace = true }
+dirs = { workspace = true }

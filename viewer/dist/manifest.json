@@ -1,0 +1,21 @@
+{
+  "version": "1",
+  "updated": "2026-02-20T14:30:22Z",
+  "reports": [
+    {
+      "id": "umbra-20260220-143022",
+      "timestamp": "2026-02-20T14:30:22Z",
+      "source": {
+        "namespace": "lilitu-staging",
+        "podName": "backend-7f8b9c6d4-x2k9p",
+        "hostname": "backend-7f8b9c6d4-x2k9p"
+      },
+      "securityScore": 66,
+      "totalServices": 8,
+      "reachableServices": 7,
+      "tlsCoveragePercent": 0.0,
+      "durationMs": 4250,
+      "reportPath": "report.json"
+    }
+  ]
+}
