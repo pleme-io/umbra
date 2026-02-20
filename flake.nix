@@ -17,14 +17,14 @@
 
     registry = "ghcr.io/pleme-io/umbra-agent";
 
-    archTag = {
-      "x86_64-linux" = "amd64";
-      "aarch64-linux" = "arm64";
-    };
-
     mkPkgs = system: import nixpkgs {
       inherit system;
       overlays = [ substrate.overlays.${system}.rust ];
+    };
+
+    # Substrate lib for release helpers (instantiated per host system)
+    mkSubstrateLib = system: import "${substrate}/lib" {
+      pkgs = mkPkgs system;
     };
 
     darwinDeps = pkgs: pkgs.lib.optionals pkgs.stdenv.isDarwin (
@@ -154,26 +154,6 @@
         };
       };
     };
-
-    # Release: build both arches + push to GHCR
-    mkReleaseScript = hostPkgs: let
-      pushArch = targetSystem: let
-        image = mkImage targetSystem;
-        arch = archTag.${targetSystem};
-      in ''
-        echo "==> Pushing ${registry}:${arch}-$SHORT_SHA"
-        ${hostPkgs.skopeo}/bin/skopeo copy docker-archive:${image} docker://${registry}:${arch}-$SHORT_SHA
-        ${hostPkgs.skopeo}/bin/skopeo copy docker-archive:${image} docker://${registry}:${arch}-latest
-      '';
-    in
-      hostPkgs.writeShellScript "release-umbra-agent" ''
-        set -euo pipefail
-        SHORT_SHA=$(${hostPkgs.git}/bin/git rev-parse --short HEAD)
-        echo "==> Releasing ${registry}"
-        ${pushArch "x86_64-linux"}
-        ${pushArch "aarch64-linux"}
-        echo "==> Done: ${registry}"
-      '';
   in {
     packages = forEach allSystems (system: let
       pkgs = mkPkgs system;
@@ -186,19 +166,20 @@
     });
 
     apps = forEach allSystems (system: let
-      pkgs = mkPkgs system;
+      substrateLib = mkSubstrateLib system;
     in {
       default = {
         type = "app";
-        program = "${mkUmbra pkgs}/bin/umbra";
+        program = "${mkUmbra (mkPkgs system)}/bin/umbra";
       };
       umbra-agent = {
         type = "app";
-        program = "${mkUmbraAgent pkgs}/bin/umbra-agent";
+        program = "${mkUmbraAgent (mkPkgs system)}/bin/umbra-agent";
       };
-      release = {
-        type = "app";
-        program = toString (mkReleaseScript pkgs);
+      # Multi-arch release via substrate helper
+      release = substrateLib.mkImageReleaseApp {
+        name = "umbra-agent";
+        inherit registry mkImage;
       };
     });
 
