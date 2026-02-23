@@ -124,11 +124,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771624472,
-        "narHash": "sha256-TDbbAhfORs4Tm3zSA0oyhbLwKGMnZgUM39rPTP7E01Q=",
+        "lastModified": 1771861648,
+        "narHash": "sha256-XjYnA7XQUFTg/XrgQL35oojiX/oddmuqHSsLbQg+X44=",
         "ref": "refs/heads/main",
-        "rev": "6e66a2bb45c9c04e13fa14d6baead2ca4bcf339e",
-        "revCount": 12,
+        "rev": "0f97a626e8141f4ffa2a4e143f96df2689a82b6b",
+        "revCount": 22,
         "type": "git",
         "url": "ssh://git@github.com/pleme-io/substrate.git"
       },

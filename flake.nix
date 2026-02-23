@@ -27,20 +27,7 @@
       pkgs = mkPkgs system;
     };
 
-    darwinDeps = pkgs: pkgs.lib.optionals pkgs.stdenv.isDarwin (
-      if pkgs ? apple-sdk
-      then [ pkgs.apple-sdk ]
-      else pkgs.lib.optionals (pkgs ? darwin) (
-        with pkgs.darwin.apple_sdk.frameworks; [
-          Security
-          SystemConfiguration
-        ]
-      )
-    );
-
-    commonBuildInputs = pkgs: pkgs.lib.optionals pkgs.stdenv.isDarwin [
-      pkgs.libiconv
-    ] ++ darwinDeps pkgs;
+    darwinBuildInputs = pkgs: (import "${substrate}/lib/darwin.nix").mkDarwinBuildInputs pkgs;
 
     mkUmbra = pkgs: pkgs.rustPlatform.buildRustPackage {
       pname = "umbra";
@@ -49,7 +36,7 @@
       cargoLock.lockFile = ./Cargo.lock;
       cargoBuildFlags = [ "--package" "umbra" ];
       nativeBuildInputs = [ pkgs.pkg-config ];
-      buildInputs = commonBuildInputs pkgs;
+      buildInputs = darwinBuildInputs pkgs;
       meta = with pkgs.lib; {
         description = "Local MCP proxy for Kubernetes container diagnostics";
         homepage = "https://github.com/pleme-io/umbra";
@@ -65,7 +52,7 @@
       cargoLock.lockFile = ./Cargo.lock;
       cargoBuildFlags = [ "--package" "umbra-agent" ];
       nativeBuildInputs = [ pkgs.pkg-config ];
-      buildInputs = commonBuildInputs pkgs;
+      buildInputs = darwinBuildInputs pkgs;
       meta = with pkgs.lib; {
         description = "Container-side MCP agent for Kubernetes diagnostics";
         homepage = "https://github.com/pleme-io/umbra";
@@ -192,7 +179,7 @@
           pkgs.rustc
           pkgs.pkg-config
         ];
-        buildInputs = commonBuildInputs pkgs;
+        buildInputs = darwinBuildInputs pkgs;
         RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
       };
     });
