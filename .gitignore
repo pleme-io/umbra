@@ -1,3 +1,6 @@
 /target
 node_modules/
 result
+/viewer/dist/
+/viewer/public/report.json
+/viewer/public/manifest.json
