@@ -76,16 +76,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1771369470,
-        "narHash": "sha256-0NBlEBKkN3lufyvFegY4TYv5mCNHbi5OmBDrzihbBMQ=",
+        "lastModified": 1772047000,
+        "narHash": "sha256-7DaQVv4R97cii/Qdfy4tmDZMB2xxtyIvNGSwXBBhSmo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0182a361324364ae3f436a63005877674cf45efb",
+        "rev": "1267bb4920d0fc06ea916734c11b0bf004bbe17e",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "ref": "nixos-25.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -124,11 +124,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771861648,
-        "narHash": "sha256-XjYnA7XQUFTg/XrgQL35oojiX/oddmuqHSsLbQg+X44=",
+        "lastModified": 1771949692,
+        "narHash": "sha256-ta4iMpciVxs7pVtUmZyyE+LuwSgeoVp7cX6ZzAOiRCQ=",
         "ref": "refs/heads/main",
-        "rev": "0f97a626e8141f4ffa2a4e143f96df2689a82b6b",
-        "revCount": 22,
+        "rev": "fb9cc398db7884e98dfb160daef0c4433bbc658c",
+        "revCount": 26,
         "type": "git",
         "url": "ssh://git@github.com/pleme-io/substrate.git"
       },
