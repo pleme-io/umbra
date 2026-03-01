@@ -10,6 +10,9 @@ members = [
 edition = "2021"
 version = "0.1.0"
 license = "MIT"
+authors = ["Pleme Team <team@pleme.io>"]
+repository = "https://github.com/pleme-io/umbra"
+homepage = "https://github.com/pleme-io/umbra"
 
 [workspace.dependencies]
 umbra-core = { path = "crates/umbra-core" }

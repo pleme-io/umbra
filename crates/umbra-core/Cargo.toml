@@ -3,7 +3,12 @@ name = "umbra-core"
 edition.workspace = true
 version.workspace = true
 license.workspace = true
-description = "Shared types and K8s environment parsing for Umbra"
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "Shared types and K8s environment parsing for Umbra diagnostic proxy"
+keywords = ["kubernetes", "diagnostics", "mcp", "container"]
+categories = ["development-tools"]
 
 [dependencies]
 serde = { workspace = true }

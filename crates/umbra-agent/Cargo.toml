@@ -3,7 +3,12 @@ name = "umbra-agent"
 edition.workspace = true
 version.workspace = true
 license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Container-side MCP agent for Kubernetes diagnostics"
+keywords = ["kubernetes", "diagnostics", "mcp", "agent"]
+categories = ["development-tools", "command-line-utilities"]
 
 [[bin]]
 name = "umbra-agent"
