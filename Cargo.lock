@@ -953,6 +953,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
 
 [[package]]
+name = "pleme-umbra"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "dirs",
+ "rmcp",
+ "serde",
+ "serde_json",
+ "serde_yaml",
+ "thiserror",
+ "tokio",
+ "toml",
+ "tracing",
+ "tracing-subscriber",
+ "umbra-core",
+]
+
+[[package]]
 name = "portable-atomic"
 version = "1.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1819,24 +1837,6 @@ name = "try-lock"
 version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
-
-[[package]]
-name = "umbra"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "dirs",
- "rmcp",
- "serde",
- "serde_json",
- "serde_yaml",
- "thiserror",
- "tokio",
- "toml",
- "tracing",
- "tracing-subscriber",
- "umbra-core",
-]
 
 [[package]]
 name = "umbra-agent"

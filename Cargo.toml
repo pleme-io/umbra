@@ -15,7 +15,7 @@ repository = "https://github.com/pleme-io/umbra"
 homepage = "https://github.com/pleme-io/umbra"
 
 [workspace.dependencies]
-umbra-core = { path = "crates/umbra-core" }
+umbra-core = { path = "crates/umbra-core", version = "0.1.0" }
 rmcp = "0.16"
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
