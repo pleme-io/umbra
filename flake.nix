@@ -4,9 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-utils.url = "github:numtide/flake-utils";
-    substrate = {
-      url = "git+ssh://git@github.com/pleme-io/substrate.git";
+    fenix = {
+      url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    substrate = {
+      url = "github:pleme-io/substrate";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.fenix.follows = "fenix";
     };
   };
 
@@ -19,7 +24,7 @@
 
     mkPkgs = system: import nixpkgs {
       inherit system;
-      overlays = [ substrate.overlays.${system}.rust ];
+      overlays = [ substrate.rustOverlays.${system}.rust ];
     };
 
     # Substrate lib for release helpers (instantiated per host system)
