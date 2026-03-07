@@ -43,7 +43,7 @@
       version = "0.1.0";
       src = ./.;
       cargoLock.lockFile = ./Cargo.lock;
-      cargoBuildFlags = [ "--package" "umbra" ];
+      cargoBuildFlags = [ "--package" "pleme-umbra" ];
       nativeBuildInputs = [ pkgs.pkg-config ];
       buildInputs = darwinBuildInputs pkgs;
       meta = with pkgs.lib; {
