@@ -21,11 +21,13 @@ in {
     defaultPackage = pkgs.umbra;
   };
 
-  config = mkIf mcpCfg.enable (mkAnvilRegistration {
+  # Self-register with anvil unconditionally — enable flag controls activation.
+  config = mkAnvilRegistration {
     name = "umbra";
     command = "umbra";
     package = mcpCfg.package;
+    enable = mcpCfg.enable;
     description = "Kubernetes container diagnostics";
     scopes = mcpCfg.scopes;
-  });
+  };
 }
