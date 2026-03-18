@@ -1,11 +1,9 @@
 # umbra home-manager module — MCP server entry only
 #
 # Umbra runs in-cluster (no local daemon). This module only registers
-# the MCP server with anvil for all AI coding agents.
+# an MCP server entry for consumption by blackmatter-claude (bridge pattern).
 #
 # Namespace: services.umbra.mcp.*
-#
-# Module factory: receives { hmHelpers } from flake.nix, returns HM module.
 { hmHelpers }:
 {
   lib,
@@ -14,20 +12,16 @@
   ...
 }:
 with lib; let
-  inherit (hmHelpers) mkMcpOptions mkAnvilRegistration;
+  inherit (hmHelpers) mkMcpOptions mkMcpServerEntry;
   mcpCfg = config.services.umbra.mcp;
 in {
   options.services.umbra.mcp = mkMcpOptions {
     defaultPackage = pkgs.umbra;
   };
 
-  # Self-register with anvil unconditionally — enable flag controls activation.
-  config = mkAnvilRegistration {
-    name = "umbra";
-    command = "umbra";
-    package = mcpCfg.package;
-    # enable controlled by anvil server default (true)
-    description = "Kubernetes container diagnostics";
-    scopes = mcpCfg.scopes;
+  config = mkIf mcpCfg.enable {
+    services.umbra.mcp.serverEntry = mkMcpServerEntry {
+      command = "${mcpCfg.package}/bin/umbra";
+    };
   };
 }
