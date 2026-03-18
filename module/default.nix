@@ -26,7 +26,7 @@ in {
     name = "umbra";
     command = "umbra";
     package = mcpCfg.package;
-    enable = mcpCfg.enable;
+    # enable controlled by anvil server default (true)
     description = "Kubernetes container diagnostics";
     scopes = mcpCfg.scopes;
   };
