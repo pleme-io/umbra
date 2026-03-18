@@ -192,5 +192,9 @@
         RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
       };
     });
+
+    homeManagerModules.default = import ./module {
+      hmHelpers = import "${substrate}/lib/hm-service-helpers.nix" { lib = nixpkgs.lib; };
+    };
   };
 }
